@@ -14,6 +14,7 @@ Aruba/
 │   ├── Pawn.py
 │   └── Move.py
 ├── controler/
+│   ├── AutoPlayer.py
 │   └── Game.py
 └── boundary/
     └── View.py
