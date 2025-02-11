@@ -50,7 +50,7 @@ Assurez-vous d'avoir Python installé sur votre machine.
 Pour installer le projet, il suffit de cloner le dépôt git.
 
 ```bash
-git clone <URL_DU_DEPOT>
+git clone https://github.com/Manolo-dev/Aruba/
 cd Aruba
 ```
 
