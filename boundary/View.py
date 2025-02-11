@@ -4,7 +4,7 @@ from controler.Game import Game
 from entity.Pawn import Pawn
 
 class View:
-    def __init__(self, game, iptWhite: Callable[[], str], iptBlack: Callable[[], str]) :
+    def __init__(self, game:Game, iptWhite: Callable[[], str], iptBlack: Callable[[], str]) :
         """
         Construit une interface utilisateur prenant en entrée un jeu et deux fonctions de saisie de coup.
 
@@ -106,40 +106,42 @@ class View:
                 _input = self.iptWhite
             case Pawn.VOID :
                 player = " " # Case vide
-
-        print("\033[2K" + player + " (x\u2081y\u2081x\u2082y\u2082): ", end="") # Efface la ligne et affiche le joueur courant et la demande de coup. Rappel : \u2081 et \u2082 affichent les indices en exposant (voir README.md)
         
-        ipt = _input()
+        while True : # Demande une saisie tant que le coup n'est pas valide
 
-        if len(ipt) == 0 or ipt == "pass" : # Si la saisie est vide ou égale à "pass", le joueur passe son tour
-            return (-1, -1, -1, -1)
-        
-        if ipt == "exit" or ipt == "quit" or ipt == "q" : # Si la saisie est égale à "exit", "quit" ou "q", on arrête la partie
-            return (-2, -2, -2, -2)
+            print("\033[2K" + player + " (x\u2081y\u2081x\u2082y\u2082): ", end="") # Efface la ligne et affiche le joueur courant et la demande de coup. Rappel : \u2081 et \u2082 affichent les indices en exposant (voir README.md)
+            
+            ipt = _input()
 
-        if len(ipt) != 4 : # Si la saisie n'est pas de la forme "ABCD", on redemande une saisie
-            return self._input()
-        
-        x1 = ipt[0]
-        y1 = ipt[1]
-        x2 = ipt[2]
-        y2 = ipt[3]
+            if len(ipt) == 0 or ipt == "pass" : # Si la saisie est vide ou égale à "pass", le joueur passe son tour
+                return (-1, -1, -1, -1)
+            
+            if ipt == "exit" or ipt == "quit" or ipt == "q" : # Si la saisie est égale à "exit", "quit" ou "q", on arrête la partie
+                return (-2, -2, -2, -2)
 
-        if not x1.isalpha() or not y1.isdigit() or not x2.isalpha() or not y2.isdigit() : # Si les coordonnées ne sont pas des lettres ou des chiffres, on redemande une saisie
-            return self._input()
-        
-        x1 = ord(x1.upper()) - 65 # Conversion des lettres en nombres (A -> 0, B -> 1, C -> 2, ...)
-        y1 = int(y1) - 1
-        x2 = ord(x2.upper()) - 65
-        y2 = int(y2) - 1
+            if len(ipt) != 4 : # Si la saisie n'est pas de la forme "ABCD", on redemande une saisie
+                continue
+            
+            x1 = ipt[0]
+            y1 = ipt[1]
+            x2 = ipt[2]
+            y2 = ipt[3]
 
-        if (not (0 <= x1 < self.game.get_size()) or
-            not (0 <= y1 < self.game.get_size()) or
-            not (0 <= x2 < self.game.get_size()) or
-            not (0 <= y2 < self.game.get_size())) : # Si les coordonnées ne sont pas dans le plateau de jeu, on redemande une saisie
-            return self._input()
-        
-        return x1, y1, x2, y2
+            if not x1.isalpha() or not y1.isdigit() or not x2.isalpha() or not y2.isdigit() : # Si les coordonnées ne sont pas des lettres ou des chiffres, on redemande une saisie
+                continue
+            
+            x1 = ord(x1.upper()) - 65 # Conversion des lettres en nombres (A -> 0, B -> 1, C -> 2, ...)
+            y1 = int(y1) - 1
+            x2 = ord(x2.upper()) - 65
+            y2 = int(y2) - 1
+
+            if (not (0 <= x1 < self.game.get_size()) or
+                not (0 <= y1 < self.game.get_size()) or
+                not (0 <= x2 < self.game.get_size()) or
+                not (0 <= y2 < self.game.get_size())) : # Si les coordonnées ne sont pas dans le plateau de jeu, on redemande une saisie
+                continue
+            
+            return x1, y1, x2, y2
 
     def play(self) -> None :
         """

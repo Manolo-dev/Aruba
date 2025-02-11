@@ -14,6 +14,7 @@ Aruba/
 │   ├── Pawn.py
 │   └── Move.py
 ├── controler/
+│   ├── Markdown.py
 │   ├── AutoPlayer.py
 │   └── Game.py
 └── boundary/
@@ -33,6 +34,7 @@ Aruba/
 - Déplacement des pions sur le plateau.
 - Prise de pions adverses.
 - Configuration standard du jeu
+- Affichage des règles du jeu en Markdown dans le terminal.
 
 ## Configuration du jeu
 
