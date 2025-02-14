@@ -36,4 +36,3 @@ L'objectif du jeu est de capturer les pions adverses.
 - Si un joueur saisit une commande incorrecte, il doit recommencer.
 - Les coups doivent respecter les limites du plateau.
 - Les pions ne peuvent pas se superposer.
-

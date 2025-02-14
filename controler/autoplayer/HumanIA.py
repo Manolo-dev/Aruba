@@ -13,9 +13,10 @@ class HumanIA(AutoPlayer) :
         game : Game
             Le jeu.
         """
+
+        super().__init__(game) # Appel du constructeur de la classe mère
         
         self.game = game
-        self.shots = []
         self.name = "HumanIA"
 
     def input(self) -> str :
@@ -24,11 +25,12 @@ class HumanIA(AutoPlayer) :
 
         Returns:
         --------
-        str : Le coup aléatoire.
+        str
+            Le coup aléatoire.
         """
 
         itp = input()
 
-        self.shots.append(itp)
+        self.last_shot = itp # Enregistre
 
         return itp

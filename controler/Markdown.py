@@ -180,23 +180,23 @@ class Markdown:
                 
                 match level:
                     case 1:
-                        formatted = "╔" + "═" * (len(title) + 2) + "╗\n" + "║ " + "\033[1m" + title + "\033[0m" + " ║\n" + "╚" + "═" * (len(title) + 2) + "╝"
+                        formatted = "╔" + "═" * (len(title) + 2) + "╗\n" + "║ " + "\033[1;37m" + title + "\033[0m" + " ║\n" + "╚" + "═" * (len(title) + 2) + "╝"
                     case 2:
-                        formatted = "┌" + "─" * (len(title) + 2) + "┐\n" + "│ " + "\033[1m" + title + "\033[0m" + " │\n" + "╘" + "═" * (len(title) + 2) + "╛"
+                        formatted = "┌" + "─" * (len(title) + 2) + "┐\n" + "│ " + "\033[1;37m" + title + "\033[0m" + " │\n" + "╘" + "═" * (len(title) + 2) + "╛"
                     case 3:
-                        formatted = "┌" + "─" * (len(title) + 2) + "┐\n" + "│ " + "\033[1m" + title + "\033[0m" + " │\n" + "└" + "─" * (len(title) + 2) + "┘"
+                        formatted = "┌" + "─" * (len(title) + 2) + "┐\n" + "│ " + "\033[1;37m" + title + "\033[0m" + " │\n" + "└" + "─" * (len(title) + 2) + "┘"
                     case 4:
-                        formatted = " " + "\033[1m" + title + "\033[0m" + " \n" + "═" * (len(title) + 2)
+                        formatted = " " + "\033[1;37m" + title + "\033[0m" + " \n" + "═" * (len(title) + 2)
                     case 5:
-                        formatted = " " + "\033[1m" + title + "\033[0m" + " \n" + "╍" * (len(title) + 2)
+                        formatted = " " + "\033[1;37m" + title + "\033[0m" + " \n" + "╍" * (len(title) + 2)
                     case 6:
-                        formatted = " " + "\033[1m" + title + "\033[0m" + " \n" + "─" * (len(title) + 2)
+                        formatted = " " + "\033[1;37m" + title + "\033[0m" + " \n" + "─" * (len(title) + 2)
                 
                 output.append(formatted)
             else:  # Si la ligne n'est pas un titre
                 replacements = [
-                    (r"\*\*(.*?)\*\*", r"\033[1m\1\033[0m"),                               # Gras
-                    (r"__(.*?)__", r"\033[1m\1\033[0m"),                                   # Gras
+                    (r"\*\*(.*?)\*\*", r"\033[1;37m\1\033[0m"),                               # Gras
+                    (r"__(.*?)__", r"\033[1;37m\1\033[0m"),                                   # Gras
                     (r"\*(.*?)\*", r"\033[3m\1\033[0m"),                                   # Italique
                     (r"_(.*?)_", r"\033[3m\1\033[0m"),                                     # Italique
                     (r"\~\~(.*?)\~\~", r"\033[9m\1\033[0m"),                               # Barré

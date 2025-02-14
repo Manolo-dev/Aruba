@@ -13,9 +13,10 @@ class RandomIA(AutoPlayer) :
         game : Game
             Le jeu.
         """
+
+        super().__init__(game) # Appel du constructeur de la classe mère
         
         self.game = game
-        self.shots = []
         self.name = "RandomIA"
 
     def input(self) -> str :
@@ -24,7 +25,8 @@ class RandomIA(AutoPlayer) :
 
         Returns:
         --------
-        str : Le coup aléatoire.
+        str
+            Le coup aléatoire.
         """
 
         while True : # Continue jusqu'à ce qu'un pion ait un coup possible
@@ -40,6 +42,6 @@ class RandomIA(AutoPlayer) :
         move = choice(moves) # Sélectionne un coup aléatoire
 
         move_string = f"{chr(97 + pawn[0])}{pawn[1] + 1}{chr(97 + move[0])}{move[1] + 1}" # Convertit les coordonnées en chaîne de caractères
-        self.shots.append(move_string) # Ajoute le coup à la liste des coups joués
+        self.last_shot = move_string # Enregistre
 
         return move_string

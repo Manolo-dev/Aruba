@@ -1,6 +1,6 @@
 from entity.Board import Board
-from entity.Pawn import Pawn
-from entity.Move import Move
+from utils.Pawn import Pawn
+from utils.Move import Move
 
 class Game :
     def __init__(self, size:int, config:list[tuple[int, int, Pawn]] = None) :
@@ -16,7 +16,7 @@ class Game :
         """
 
         self.board = Board(size, config) # Plateau de jeu
-        self.current_player = Pawn.BLACK # Joueur courant. L'énoncé ne précise pas qui commence, donc je choisis le joueur noir par souci de respect des minorités et de la diversité.
+        self.current_player = Pawn.BLACK # Joueur courant. L'énoncé ne précise pas qui commence, donc je choisis le joueur bleu par souci de respect des minorités et de la diversité.
         self.possible_moves = [] # Liste des coups autorisés. Si vide alors le joueur n'a aucune restriction de mouvement.
     
     def get_current_player(self) -> Pawn :
@@ -25,7 +25,8 @@ class Game :
 
         Returns:
         --------
-        Pawn : Le joueur courant.
+        Pawn
+            Le joueur courant.
         """
 
         return self.current_player
@@ -36,7 +37,8 @@ class Game :
 
         Returns:
         --------
-        list[list[int]] : Le plateau de jeu.
+        list[list[int]]
+            Le plateau de jeu.
         """
 
         return self.board.get_pawns()
@@ -47,7 +49,8 @@ class Game :
 
         Returns:
         --------
-        int : La taille du plateau de jeu.
+        int
+            La taille du plateau de jeu.
         """
 
         return self.board.get_size()
@@ -71,7 +74,8 @@ class Game :
 
         Returns:
         --------
-        bool : True si le coup a été joué avec succès, False sinon.
+        bool
+            True si le coup a été joué avec succès, False sinon.
         """
 
         if self.possible_moves != [] and (x1, y1, x2, y2) not in self.possible_moves : #  Le joueur doit prendre un pion et qu'il ne le fait pas
@@ -118,7 +122,8 @@ class Game :
 
         Returns:
         --------
-        bool : True si la partie est terminée, False sinon.
+        bool
+            True si la partie est terminée, False sinon.
         """
 
         winner = Pawn.VOID # Initialise un gagnant non défini
@@ -138,7 +143,8 @@ class Game :
 
         Returns:
         --------
-        str : Représentation textuelle de la partie.
+        str
+            Représentation textuelle de la partie.
         """
 
         return str(self.board)
@@ -156,7 +162,8 @@ class Game :
 
         Returns:
         --------
-        list[tuple[int, int, Move]] : Les coups possibles pour le pion.
+        list[tuple[int, int, Move]]
+            Les coups possibles pour le pion.
         """
 
         result = []

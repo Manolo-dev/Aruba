@@ -2,7 +2,7 @@ from typing import Callable
 
 from utils.terminal import clear
 from controler.Game import Game
-from entity.Pawn import Pawn
+from utils.Pawn import Pawn
 
 class View:
     def __init__(self, game:Game, iptBlack:Callable[[], str]=input, iptWhite:Callable[[], str]=input) :
@@ -14,9 +14,9 @@ class View:
         game : Game
             Le jeu.
         iptBlack : Callable[[], str], optional
-            La fonction de saisie de coup du joueur noir.
+            La fonction de saisie de coup du joueur bleu.
         iptWhite : Callable[[], str], optional
-            La fonction de saisie de coup du joueur blanc.
+            La fonction de saisie de coup du joueur rouge.
         """
         self.game = game
         self.iptWhite = iptWhite
@@ -65,9 +65,9 @@ class View:
         print("\033[" + str(2*y+2) + ";" + str(4*x+5) + "H", end="") # Se déplace à la position (x, y) du plateau de jeu
         match p :
             case Pawn.BLACK :
-                print("\033[30m●\033[0m") # Affiche un pion noir. Rappel : \033[30m change la couleur du texte en noir, \033[0m réinitialise la couleur (voir README.md)
+                print("\033[34m●\033[0m") # Affiche un pion bleu. Rappel : \033[34m change la couleur du texte en bleu, \033[0m réinitialise la couleur (voir README.md)
             case Pawn.WHITE :
-                print("\033[37m●\033[0m") # Affiche un pion blanc. Rappel : \033[37m change la couleur du texte en blanc (voir README.md)
+                print("\033[31m●\033[0m") # Affiche un pion rouge. Rappel : \033[31m change la couleur du texte en rouge (voir README.md)
             case Pawn.VOID :
                 print(" ") # Affiche une case vide et efface le pion précédent si présent
     
@@ -94,24 +94,25 @@ class View:
 
         Returns:
         --------
-        tuple[int, int, int, int] : Les coordonnées du coup.
+        tuple[int, int, int, int]
+            Les coordonnées du coup.
         """
-
-        print("\033[" + str(2*self.game.get_size()+3) + ";0H")
 
         match self.game.get_current_player() :
             case Pawn.BLACK :
-                player = "\033[30m●\033[0m" # Pion noir
+                player = "\033[34m●\033[0m" # Pion bleu
                 _input = self.iptBlack.input
             case Pawn.WHITE :
-                player = "\033[37m●\033[0m" # Pion blanc
+                player = "\033[31m●\033[0m" # Pion rouge
                 _input = self.iptWhite.input
             case Pawn.VOID :
                 player = " " # Case vide
         
         while True : # Demande une saisie tant que le coup n'est pas valide
 
-            print("\033[2K" + player + " (x\u2081y\u2081x\u2082y\u2082): ", end="") # Efface la ligne et affiche le joueur courant et la demande de coup. Rappel : \u2081 et \u2082 affichent les indices en exposant (voir README.md)
+            print("\033[" + str(2*self.game.get_size()+3) + ";0H") # Se déplace à la dernière ligne du plateau
+
+            print("\033[2K" + player + " ", end="") # Efface la ligne et affiche le joueur courant et la demande de coup. Rappel : \u2081 et \u2082 affichent les indices en exposant (voir README.md)
             
             ipt = _input()
 
@@ -167,37 +168,16 @@ class View:
                 self.game.pass_turn()
                 continue
 
-            if not self.game.play(x1, y1, x2, y2) : # Si le coup n'est pas valide, on dis caca
-                print("caca\n\n", x1, y1, x2, y2)
+            if self.game.play(x1, y1, x2, y2) : # Si le coup est valide, on le valide auprès du jouer
+                match self.game.get_current_player() :
+                    case Pawn.BLACK :
+                        self.iptBlack.played()
+                    case Pawn.WHITE :
+                        self.iptWhite.played()
 
             winner = self.game.is_finished() # Vérifie si la partie est terminée
 
             if winner != Pawn.VOID : # Si la partie est terminée, on arrête la boucle
                 break
-
-        self._end(winner) # Affiche l'écran de fin de partie
-
-    def _end(self, winner:Pawn) -> None :
-        """
-        Affiche l'écran de fin de partie.
-
-        Parameters:
-        -----------
-        winner : Pawn
-            Le gagnant de la partie.
-        """
         
-        clear() # Efface l'écran
-        print("┌" + "─" * 29 + "┐") # Bordure supérieure
-        print("│" + " " * 29 + "│") # Ligne vide
-
-        match winner : # Affiche le gagnant selon sa couleur
-            case Pawn.BLACK :
-                print("│" + " " * 4 + "Victoire des  noirs !" + " " * 4 + "│") # Rappel : "│" et "─" sont des caractères spéciaux (voir README.md)
-            case Pawn.WHITE :
-                print("│" + " " * 4 + "Victoire des blancs !" + " " * 4 + "│")
-            case Pawn.VOID :
-                print("│" + " " * 11 + "Abandon" + " " * 11 + "│")
-
-        print("│" + " " * 29 + "│")  # Ligne vide
-        print("└" + "─" * 29 + "┘") # Bordure inférieure
+        return winner

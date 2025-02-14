@@ -26,7 +26,8 @@ class Menu :
 
         Returns:
         --------
-        str : Les règles du jeu.
+        str
+            Les règles du jeu.
         """
 
         with open(self.rulesfile, "r") as f :
@@ -38,7 +39,8 @@ class Menu :
 
         Returns:
         --------
-        list[AutoPlayer] : La liste des joueurs automatiques.
+        list[AutoPlayer]
+            La liste des joueurs automatiques.
         """
 
         return self.autoplayers
@@ -61,7 +63,8 @@ class Menu :
 
         Returns:
         --------
-        Game : Le jeu.
+        Game
+            Le jeu.
         """
 
         return self.game

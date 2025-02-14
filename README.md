@@ -45,11 +45,11 @@ Aruba/
 ## Configuration du jeu
 
 Le plateau est une grille carrée de $n\times n$ remplie selon le schéma suivant :
-- La moitié supérieure gauche (excluant la diagonale centrale) est remplie de pions noirs.
-- La moitié inférieure droite (excluant la diagonale centrale) est remplie de pions blancs.
+- La moitié supérieure gauche (excluant la diagonale centrale) est remplie de pions bleus.
+- La moitié inférieure droite (excluant la diagonale centrale) est remplie de pions rouges.
 - La diagonale centrale est divisée en deux parties :
-    - Une partie avec des pions blancs.
-    - Une autre partie avec des pions noirs.
+    - Une partie avec des pions rouges.
+    - Une autre partie avec des pions bleus.
     - Une ou deux cases peuvent rester vides, selon que $n$ est pair ou impair.
 
 ## Installation et exécution

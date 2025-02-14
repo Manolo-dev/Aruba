@@ -1,7 +1,7 @@
 from math import sqrt
 
-from entity.Pawn import Pawn
-from entity.Move import Move
+from utils.Pawn import Pawn
+from utils.Move import Move
 
 class Board :
     def __init__(self, size:int, config:list[tuple[int, int, Pawn]] = None) :
@@ -9,11 +9,11 @@ class Board :
         Initialise un nouveau plateau de jeu de la taille spécifiée, avec une configuration initiale optionnelle.
 
         Le plateau est une grille carrée de `size x size` remplie selon le schéma suivant :
-        - La moitié supérieure gauche (excluant la diagonale centrale) est remplie de pions noirs (`Pawn.BLACK`).
-        - La moitié inférieure droite (excluant la diagonale centrale) est remplie de pions blancs (`Pawn.WHITE`).
+        - La moitié supérieure gauche (excluant la diagonale centrale) est remplie de pions bleus (`Pawn.BLACK`).
+        - La moitié inférieure droite (excluant la diagonale centrale) est remplie de pions rouges (`Pawn.WHITE`).
         - La diagonale centrale est divisée en deux parties :
-            - Une partie avec des pions blancs (`Pawn.WHITE`).
-            - Une autre partie avec des pions noirs (`Pawn.BLACK`).
+            - Une partie avec des pions rouges (`Pawn.WHITE`).
+            - Une autre partie avec des pions bleus (`Pawn.BLACK`).
             - Une ou deux cases peuvent rester vides (`Pawn.VOID`), selon que `size` est pair ou impair.
 
         Parameters:
@@ -63,7 +63,8 @@ class Board :
         
         Returns:
         --------
-        Pawn : La valeur du pion à la position spécifiée.
+        Pawn
+            La valeur du pion à la position spécifiée.
         """
 
         return self.board[y][x]
@@ -74,7 +75,8 @@ class Board :
         
         Returns:
         --------
-        list[tuple[int, int, Pawn]] : Les pions du plateau de jeu.
+        list[tuple[int, int, Pawn]]
+            Les pions du plateau de jeu.
         """
 
         # NOTE: On pourrait utiliser le yield pour optimiser la mémoire et avoir un code plus propre, mais cela empièterait sur la lisibilité du code.
@@ -110,7 +112,8 @@ class Board :
 
         Returns:
         --------
-        int : La taille du plateau de jeu.
+        int
+            La taille du plateau de jeu.
         """
 
         return self.size
@@ -139,7 +142,8 @@ class Board :
 
         Returns:
         --------
-        bool : `True` si le déplacement est valide, sinon `False`.
+        bool
+            `True` si le déplacement est valide, sinon `False`.
         """
 
         if (not (0 <= x1 < self.size) or

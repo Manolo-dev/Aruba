@@ -5,6 +5,7 @@ from boundary.View import View
 from boundary.Keyboard import Keyboard
 from controler.AutoPlayer import AutoPlayer
 from controler.autoplayer.HumanIA import HumanIA
+from utils.Pawn import Pawn
 
 class MenuView :
     def __init__(self, menu:Menu) :
@@ -63,7 +64,7 @@ class MenuView :
         clear() # Efface l'écran
         print("\033[?25l", end="", flush=True) # Cache le curseur
 
-        print("\033[1m" # Gras
+        print("\033[1;37m" # Gras
               "╔══════╦══════╦══╗\n"
               "║╔═╗   ╚╗  ╔══╬╗╔╣\n"
               "╠╝╔╝╔═══╩══╩═╗╚╬╝║\n"
@@ -85,12 +86,9 @@ class MenuView :
         match n : # Exécute l'action correspondante
             case 0 :
                 autoplayer = self._choice_player()
-                view = View(self.menu.get_game(), autoplayer, HumanIA(self.menu.get_game()))
-                view.play()
-                while True :
-                    ch = Keyboard.getch()
-                    if ch == Keyboard.NL :
-                        break
+                view = View(self.menu.get_game(), HumanIA(self.menu.get_game()), autoplayer)
+                winner = view.play()
+                self._end(winner) # Affiche l'écran de fin de partie
             case 1 :
                 self._rules()
             case 2 :
@@ -121,8 +119,8 @@ class MenuView :
         label = label.center(14)
 
         print((f"\033[{line};1H" if line else "") + # Se déplace à la ligne
-                "\033[1m" +                         # Gras
-               ("\033[31m" if focus else "") +      # Rouge si focus
+                "\033[1;37m" + # Gras
+               ("\033[31m" if focus else "") + # Rouge si focus
                 "┌────────────────┐\n"
                f"│ {   label    } │\n"
                 "└────────────────┘\n"
@@ -135,7 +133,8 @@ class MenuView :
 
         Returns:
         --------
-        AutoPlayer : Le joueur automatique choisi.
+        AutoPlayer
+            Le joueur automatique choisi.
         """
 
         autoplayers = [HumanIA(self.menu.get_game())] + self.menu.get_autoplayers()
@@ -168,11 +167,42 @@ class MenuView :
             
             ch = Keyboard.getch() # Récupère un caractère
             match ch :
-                case Keyboard.NL :
+                case Keyboard.NL : # Sort de la boucle
                     break
-                case Keyboard.TOP :
+                case Keyboard.TOP : # Scroll
                     n = max(0, n-2)
                 case Keyboard.DOWN :
-                    n = min(len(markdown), n+2)
+                    n = min(len(markdown)-3, n+2)
 
         self.start()
+    
+
+    def _end(self, winner:Pawn) -> None :
+        """
+        Affiche l'écran de fin de partie.
+
+        Parameters:
+        -----------
+        winner : Pawn
+            Le gagnant de la partie.
+        """
+        
+        clear() # Efface l'écran
+        print("┌" + "─" * 29 + "┐") # Bordure supérieure
+        print("│" + " " * 29 + "│") # Ligne vide
+
+        match winner : # Affiche le gagnant selon sa couleur
+            case Pawn.BLACK :
+                print("│" + "Victoire des  bleus !".center(29) + "│") # Rappel : "│" et "─" sont des caractères spéciaux (voir README.md)
+            case Pawn.WHITE :
+                print("│" + "Victoire des rouges !".center(29) + "│")
+            case Pawn.VOID :
+                print("│" + " " * 11 + "Abandon" + " " * 11 + "│")
+
+        print("│" + " " * 29 + "│")  # Ligne vide
+        print("└" + "─" * 29 + "┘") # Bordure inférieure
+
+        while True :
+            ch = Keyboard.getch()
+            if ch == Keyboard.NL :
+                break

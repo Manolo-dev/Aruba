@@ -12,6 +12,8 @@ class AutoPlayer(ABC):
             Le jeu.
         """
         self.game = game
+        self.temp_shot = ""
+        self.shots = []
         self.name = ""
 
     @abstractmethod
@@ -21,7 +23,8 @@ class AutoPlayer(ABC):
 
         Returns:
         --------
-        str : Le coup choisi par le joueur.
+        str
+            Le coup choisi par le joueur.
         """
         pass
 
@@ -31,7 +34,16 @@ class AutoPlayer(ABC):
 
         Returns:
         --------
-        str : Le nom du joueur automatique.
+        str
+            Le nom du joueur automatique.
         """
 
         return self.name
+
+    def played(self) -> None :
+        """
+        Valide le dernier coup.
+        """
+
+        self.shots.append(self.temp_shot) # Ajoute le coup
+        self.temp_shot = ""
