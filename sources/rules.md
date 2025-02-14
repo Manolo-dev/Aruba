@@ -6,8 +6,8 @@ L'objectif du jeu est de capturer tous les pions adverses.
 
 ## Matériel
 
-- Un plateau de jeu de taille $n\cdot n$.
-- Deux ensembles de pions (bleus et rouges).
+- Un plateau de jeu de taille $n\cdot n$ (par default $7\cdot 7$).
+- Deux ensembles de pions : bleus et rouges (Pour les distinguer facilement dans le terminal).
 - Un joueur automate ou un autre joueur.
 
 ## Déroulement du Jeu
@@ -20,7 +20,8 @@ L'objectif du jeu est de capturer tous les pions adverses.
 ## Règles de Mouvement
 
 - Les pions se déplacent sur des cases adjacentes.
-- Les pions peuvent capturer les pions adverses en sautant par-dessus eux.
+- Les pions peuvent capturer les pions adverses en sautant par-dessus eux sur la case vide suivante.
+- La capture n'est pas possible si la case suivante n'est pas vide, c'est un  **cas particulier** de superposition.
 - Si un pion vient de capturer un pion adverse, il peut continuer à capturer d'autres pions.
 - Les mouvements doivent être saisis sous la forme $x_1y_1x_2y_2$, où $x_1y_1$ est la position initiale et $x_2y_2$ la destination.
 - Les lettres désignent les colonnes (A, B, C, ...), et les chiffres désignent les lignes (1, 2, 3, ...).
