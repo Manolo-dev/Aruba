@@ -4,7 +4,7 @@ from utils.Pawn import Pawn
 from utils.Move import Move
 
 class Board :
-    def __init__(self, size:int, config:list[tuple[int, int, Pawn]] = None) :
+    def __init__(self, size:int, config:list[tuple[int, int, Pawn]]=None) :
         """
         Initialise un nouveau plateau de jeu de la taille spécifiée, avec une configuration initiale optionnelle.
 
@@ -26,7 +26,7 @@ class Board :
         """
 
         # Si la taille n'est pas comprise entre 3 et 9, on l'ajuste
-        if size <= 2 :
+        if size <= 1 :
             size = 3
         if size >= 10 :
             size = 9

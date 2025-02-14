@@ -187,20 +187,38 @@ class MenuView :
             Le gagnant de la partie.
         """
         
+        print("\033[0m", end="") # Remet les couleurs par défaut
         clear() # Efface l'écran
-        print("┌" + "─" * 29 + "┐") # Bordure supérieure
-        print("│" + " " * 29 + "│") # Ligne vide
+
+        text = ""
 
         match winner : # Affiche le gagnant selon sa couleur
             case Pawn.BLACK :
-                print("│" + "Victoire des  bleus !".center(29) + "│") # Rappel : "│" et "─" sont des caractères spéciaux (voir README.md)
+                text = "Victoire des  bleus !".center(23)
             case Pawn.WHITE :
-                print("│" + "Victoire des rouges !".center(29) + "│")
+                text = "Victoire des  rouges !".center(23)
             case Pawn.VOID :
-                print("│" + " " * 11 + "Abandon" + " " * 11 + "│")
+                text = "Abandon".center(23)
 
-        print("│" + " " * 29 + "│")  # Ligne vide
-        print("└" + "─" * 29 + "┘") # Bordure inférieure
+        print("\033[1;37m" # Gras
+              "╔════════╦╦═══╦══╦═══╦═══╦════╗\n"
+              "║╔══╗ ╔══╝╚╗  ╚╦╗║  ╔╩╗╔═╣  ╔═╣\n"
+              "║║  ║ ║╔╗  ╠═══╝╚╝╔═╝ ╠╝╔╝ ╔╣ ║\n"
+              "║╚╗ ╚╗╚╝╠══╩╦═══╦═╩╗  ╚╗╚══╣╚╗║\n"
+              "╠╦╩═╗╚══╬╗╔═╝   ╚══╩╦══╩══╗╚╗║║\n"
+              "║║ ╔╩═══╩╩╩═════════╩═════╩╗╠╩╣\n"
+              "╠╝╔╣                       ║╠╗║\n"
+              "║╔╝╚═══╦══╦════╦══╦═════╦══╬╝║║\n"
+              "║║╔╗  ╔╝  ╚╗  ╔╩═╗║╔════╝  ║╔╝║\n"
+              "║╚╝║  ╠═╦═╗╚═╗╚╦╗╚╝╚╗ ╔═╗ ╔╩╝ ║\n"
+              "║╔═╩╦═╝ ║ ╚╦═╝ ║╚═╗ ║╔╝╔╝ ║╔══╣\n"
+              "╠╝ ╔╝╔══╝ ╔╝  ╔╝  ║╔╝╚╗╚═╦╩╝  ║\n"
+              "╚══╩═╩════╩═══╩═══╩╩══╩══╩════╝\n"
+              "\033[0m", # Normal
+              end="")
+        
+        print(f"\033[7;5H\033[1m{text}\033[0m") # Affiche le gagant au centre de l'écran de fin de partie
+
 
         while True :
             ch = Keyboard.getch()
