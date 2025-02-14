@@ -187,7 +187,7 @@ class MenuView :
             Le gagnant de la partie.
         """
         
-        print("\033[0m", end="") # Remet les couleurs par défaut
+        print("\033[2K") # Efface la ligne
         clear() # Efface l'écran
 
         text = ""

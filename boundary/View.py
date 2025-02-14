@@ -112,7 +112,7 @@ class View:
 
             print("\033[" + str(2*self.game.get_size()+3) + ";0H") # Se déplace à la dernière ligne du plateau
 
-            print("\033[2K" + player + " ", end="") # Efface la ligne et affiche le joueur courant et la demande de coup. Rappel : \u2081 et \u2082 affichent les indices en exposant (voir README.md)
+            print("\033[2K" + player + " ", end="") # Efface la ligne et affiche le joueur courant et la demande de coup.
             
             ipt = _input()
 
