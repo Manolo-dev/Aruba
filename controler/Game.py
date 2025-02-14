@@ -16,7 +16,7 @@ class Game :
         """
 
         self.board = Board(size, config) # Plateau de jeu
-        self.current_player = Pawn.BLACK # Joueur courant. L'énoncé ne précise pas qui commence, donc je choisis le joueur bleu par souci de respect des minorités et de la diversité.
+        self.current_player = Pawn.BLACK # Joueur courant.
         self.possible_moves = [] # Liste des coups autorisés. Si vide alors le joueur n'a aucune restriction de mouvement.
     
     def get_current_player(self) -> Pawn :

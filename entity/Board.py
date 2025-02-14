@@ -79,7 +79,7 @@ class Board :
             Les pions du plateau de jeu.
         """
 
-        # NOTE: On pourrait utiliser le yield pour optimiser la mémoire et avoir un code plus propre, mais cela empièterait sur la lisibilité du code.
+        # NOTE: On pourrait utiliser le yield pour optimiser la mémoire et avoir un code plus propre, mais cela empièterait sur la lisibilité
 
         result = []
 
