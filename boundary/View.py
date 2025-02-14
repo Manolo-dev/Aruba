@@ -45,7 +45,7 @@ class View:
         result.append(letters)
 
         clear() # Efface l'écran
-        print("\n".join(result)) # Affiche le plateau de jeu.
+        print("\n".join(result)) # Affiche le plateau de jeu
 
 
     def _pawn(self, x:int, y:int, p:Pawn) -> None:
@@ -112,7 +112,7 @@ class View:
 
             print("\033[" + str(2*self.game.get_size()+3) + ";0H") # Se déplace à la dernière ligne du plateau
 
-            print("\033[2K" + player + " ", end="") # Efface la ligne et affiche le joueur courant et la demande de coup.
+            print("\033[2K" + player + " ", end="") # Efface la ligne et affiche le joueur courant et la demande de coup
             
             ipt = _input()
 

@@ -16,8 +16,8 @@ class Game :
         """
 
         self.board = Board(size, config) # Plateau de jeu
-        self.current_player = Pawn.BLACK # Joueur courant.
-        self.possible_moves = [] # Liste des coups autorisés. Si vide alors le joueur n'a aucune restriction de mouvement.
+        self.current_player = Pawn.BLACK # Joueur courant
+        self.possible_moves = [] # Liste des coups autorisés. Si vide alors le joueur n'a aucune restriction de mouvement
     
     def get_current_player(self) -> Pawn :
         """
@@ -113,7 +113,7 @@ class Game :
         """
 
         self.current_player = Pawn.WHITE if self.current_player == Pawn.BLACK else Pawn.BLACK # Change le joueur courant, utilisation de l'opérateur ternaire (voir README.md)
-        self.possible_moves = [] # Réinitialise les coups possibles, rappel: si vide alors le joueur n'a aucune restriction de mouvement.
+        self.possible_moves = [] # Réinitialise les coups possibles, rappel: si vide alors le joueur n'a aucune restriction de mouvement
 
     
     def is_finished(self) -> Pawn :
