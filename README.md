@@ -16,6 +16,9 @@ Aruba/
 ├── controler/
 │   ├── Markdown.py
 │   ├── AutoPlayer.py
+│   ├── autoplayer/
+│   │   ├── RandomIA.py
+│   │   └── HeuristIA.py
 │   └── Game.py
 └── boundary/
     └── View.py
@@ -35,6 +38,9 @@ Aruba/
 - Prise de pions adverses.
 - Configuration standard du jeu
 - Affichage des règles du jeu en Markdown dans le terminal.
+- Possibilité de jouer contre différentes IA :
+  - **RandomIA** : Joue un coup aléatoire.
+  - **HeuristIA** : Joue un coup en fonction d'une heuristique.
 
 ## Configuration du jeu
 

@@ -1,10 +1,8 @@
-
-from random import choice
-
+from abc import ABC, abstractmethod
 from controler.Game import Game
 
-class AutoPlayer:
-    def __init__(self, game:Game) :
+class AutoPlayer(ABC):
+    def __init__(self, game:Game):
         """
         Construit un joueur automatique prenant en entrée un jeu.
 
@@ -13,28 +11,27 @@ class AutoPlayer:
         game : Game
             Le jeu.
         """
-        
         self.game = game
-        self.shots = []
+        self.name = ""
 
-    def input(self) -> str :
+    @abstractmethod
+    def input(self) -> str:
         """
-        Retourne un coup aléatoire autorisé par le jeu.
+        Méthode pour générer le coup du joueur automatique.
 
         Returns:
         --------
-        str : Le coup aléatoire.
+        str : Le coup choisi par le joueur.
+        """
+        pass
+
+    def get_name(self) -> str :
+        """
+        Retourne le nom du joueur automatique.
+
+        Returns:
+        --------
+        str : Le nom du joueur automatique.
         """
 
-        player = self.game.get_current_player() # Récupère le joueur courant
-
-        pawns = [(x, y) for x, y, p in self.game.get_pawns() if p == player] # Récupère les coordonnées des pions du joueur courant
-        pawn = choice(pawns) # Sélectionne un pion aléatoire
-
-        moves = self.game.get_possible_moves(*pawn) # Récupère les coups possibles pour le pion sélectionné
-        move = choice(moves) # Sélectionne un coup aléatoire
-
-        move_string = f"{chr(97 + pawn[0])}{pawn[1] + 1}{chr(97 + move[0])}{move[1] + 1}" # Convertit les coordonnées en chaîne de caractères
-        self.shots.append(move_string) # Ajoute le coup à la liste des coups joués
-
-        return move_string
+        return self.name

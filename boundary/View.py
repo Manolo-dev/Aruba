@@ -1,10 +1,11 @@
 from typing import Callable
 
+from utils.terminal import clear
 from controler.Game import Game
 from entity.Pawn import Pawn
 
 class View:
-    def __init__(self, game:Game, iptWhite: Callable[[], str], iptBlack: Callable[[], str]) :
+    def __init__(self, game:Game, iptBlack:Callable[[], str]=input, iptWhite:Callable[[], str]=input) :
         """
         Construit une interface utilisateur prenant en entrée un jeu et deux fonctions de saisie de coup.
 
@@ -12,10 +13,10 @@ class View:
         -----------
         game : Game
             Le jeu.
-        iptWhite : Callable[[], str]
-            La fonction de saisie de coup du joueur blanc.
-        iptBlack : Callable[[], str]
+        iptBlack : Callable[[], str], optional
             La fonction de saisie de coup du joueur noir.
+        iptWhite : Callable[[], str], optional
+            La fonction de saisie de coup du joueur blanc.
         """
         self.game = game
         self.iptWhite = iptWhite
@@ -43,7 +44,8 @@ class View:
         result.append("  └───" + ("┴───" * (size - 1)) + "┘") # Bordure inférieure
         result.append(letters)
 
-        print("\033[H\033[J" + "\n".join(result)) # Efface l'écran et affiche le plateau de jeu. Rappel : \033[H\033[J efface l'écran (voir README.md)
+        clear() # Efface l'écran
+        print("\n".join(result)) # Affiche le plateau de jeu.
 
 
     def _pawn(self, x:int, y:int, p:Pawn) -> None:
@@ -100,10 +102,10 @@ class View:
         match self.game.get_current_player() :
             case Pawn.BLACK :
                 player = "\033[30m●\033[0m" # Pion noir
-                _input = self.iptBlack
+                _input = self.iptBlack.input
             case Pawn.WHITE :
                 player = "\033[37m●\033[0m" # Pion blanc
-                _input = self.iptWhite
+                _input = self.iptWhite.input
             case Pawn.VOID :
                 player = " " # Case vide
         
@@ -185,7 +187,7 @@ class View:
             Le gagnant de la partie.
         """
         
-        print("\033[H\033[J") # Efface l'écran
+        clear() # Efface l'écran
         print("┌" + "─" * 29 + "┐") # Bordure supérieure
         print("│" + " " * 29 + "│") # Ligne vide
 
