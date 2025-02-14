@@ -16,7 +16,6 @@ class RandomIA(AutoPlayer) :
 
         super().__init__(game) # Appel du constructeur de la classe mère
         
-        self.game = game
         self.name = "RandomIA"
 
     def input(self) -> str :

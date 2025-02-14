@@ -16,7 +16,6 @@ class HumanIA(AutoPlayer) :
 
         super().__init__(game) # Appel du constructeur de la classe mère
         
-        self.game = game
         self.name = "HumanIA"
 
     def input(self) -> str :
