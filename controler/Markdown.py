@@ -23,7 +23,7 @@ class Markdown:
             "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹", "+": "⁺", "-": "⁻", "=": "⁼", "(": "⁽", ")": "⁾", "a": "ᵃ", "b": "ᵇ", "c": "ᶜ", "d": "ᵈ", "e": "ᵉ", "f": "ᶠ", "g": "ᵍ", "h": "ʰ", "i": "ⁱ", "j": "ʲ", "k": "ᵏ", "l": "ˡ", "m": "ᵐ", "n": "ⁿ", "o": "ᵒ", "p": "ᵖ", "r": "ʳ", "s": "ˢ", "t": "ᵗ", "u": "ᵘ", "v": "ᵛ", "w": "ʷ", "x": "ˣ", "y": "ʸ", "z": "ᶻ", "A": "ᴬ", "B": "ᴮ", "C": "ᶜ", "D": "ᴰ", "E": "ᴱ", "F": "ᶠ", "G": "ᴳ", "H": "ᴴ", "I": "ᴵ", "J": "ᶲ", "K": "ᶪ", "L": "ᴸ", "M": "ᴹ", "N": "ᴺ", "O": "ᴼ", "P": "ᵽ", "R": "ʳ", "S": "ᵿ", "T": "ᵀ", "U": "ᴿ", "V": "ᵿ", "W": "ʷ", "X": "ˣ", "Y": "ʸ", "Z": "ᶻ", " ": " ",
         }
 
-        return "".join(ansis.get(char, char) for char in text)  # Remplace les caractères par leurs équivalents en exposants
+        return "".join(ansis.get(char) for char in text)  # Remplace les caractères par leurs équivalents en exposants
 
     @staticmethod
     def subscript(match:re.Match) -> str:
@@ -47,7 +47,7 @@ class Markdown:
             "0": "₀", "1": "₁", "2": "₂", "3": "₃", "4": "₄", "5": "₅", "6": "₆", "7": "₇", "8": "₈", "9": "₉", "+": "₊", "-": "₋", "=": "₌", "(": "₍", ")": "₎", "a": "ₐ", "e": "ₑ", "h": "ₕ", "i": "ᵢ", "j": "ⱼ", "k": "ₖ", "l": "ₗ", "m": "ₘ", "n": "ₙ", "o": "ₒ", "p": "ₚ", "r": "ᵣ", "s": "ₛ", "t": "ₜ", "u": "ᵤ", "v": "ᵥ", "x": "ₓ", " ": " ",
         }
 
-        return "".join(ansis.get(char, char) for char in text) # Remplace les caractères par leurs équivalents en indices
+        return "".join(ansis.get(char) for char in text) # Remplace les caractères par leurs équivalents en indices
     
     @staticmethod
     def latex(math:re.Match) -> str:
@@ -68,6 +68,10 @@ class Markdown:
         math = math.group(1)
         
         replacements = [
+            (r"_\{(.*?)\}", Markdown.subscript),             # Indices
+            (r"_(.)", Markdown.subscript),                   # Indices
+            (r"\^\{(.*?)\}", Markdown.superscript),          # Exposants
+            (r"\^(.)", Markdown.superscript),                # Exposants
             (r"\\frac\b\s*\{(.*?)\}\{(.*?)\}", r"\1 / \2"),  # Fraction
             (r"\\sqrt\b\s*\{(.*?)\}", r"√(\1)"),             # Racine carrée
             (r"\\times\b\s*", "×"),                          # Multiplication
@@ -143,10 +147,6 @@ class Markdown:
             (r"\\Tau\b\s*", "Τ"),                            # Tau majuscule
             (r"\\Upsilon\b\s*", "Υ"),                        # Upsilon majuscule
             (r"\\Phi\b\s*", "Φ"),                            # Phi majuscule
-            (r"\^\{(.*)\}", Markdown.superscript),           # Exposants
-            (r"\^(.)", Markdown.superscript),                # Exposants
-            (r"_\{(.*)\}", Markdown.subscript),              # Indices
-            (r"_(.)", Markdown.subscript),                   # Indices
         ]
         
         for pattern, replacement in replacements:  # Applique les remplacements LaTeX -> ASCII
@@ -195,14 +195,14 @@ class Markdown:
                 output.append(formatted)
             else:  # Si la ligne n'est pas un titre
                 replacements = [
-                    (r"\*\*(.*?)\*\*", r"\033[1;37m\1\033[0m"),                               # Gras
-                    (r"__(.*?)__", r"\033[1;37m\1\033[0m"),                                   # Gras
+                    (r"\$(.*?)\$", Markdown.latex),                                        # LaTeX
+                    (r"\*\*(.*?)\*\*", r"\033[1;37m\1\033[0m"),                            # Gras
+                    (r"__(.*?)__", r"\033[1;37m\1\033[0m"),                                # Gras
                     (r"\*(.*?)\*", r"\033[3m\1\033[0m"),                                   # Italique
                     (r"_(.*?)_", r"\033[3m\1\033[0m"),                                     # Italique
                     (r"\~\~(.*?)\~\~", r"\033[9m\1\033[0m"),                               # Barré
                     (r"\`(.*?)\`", r"\033[2m\1\033[0m"),                                   # Code
                     (r"(?<!\033)\[(.*?)\]\((.*?)\)", r"\033]8;;\2\033\\\1\033]8;;\033\\"), # Lien
-                    (r"\$(.*?)\$", Markdown.latex),                                # LaTeX
                 ]
                 
                 for pattern, replacement in replacements : # Applique les remplacements markdown -> ANSI

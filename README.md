@@ -1,6 +1,6 @@
 # Aruba
 
-Ce projet est un jeu de plateau simple, inspiré du jeu de dames, développé en Python. Il a été réalisé dans le cadre du cours de info1.projet à l'Université de Toulouse (anciennement Université Toulouse III - Paul Sabatier).
+Ce projet est un jeu de plateau simple, inspiré du jeu de dames, développé en Python. Il a été réalisé *à tort* dans le cadre du cours de info1.projet à l'Université de Toulouse (anciennement Université Toulouse III - Paul Sabatier).
 
 ## Structure du projet
 
@@ -10,18 +10,26 @@ Le projet est organisé selon le modèle ECB (Entity-Control-Boundary). L'archit
 Aruba/
 ├── main.py
 ├── entity/
-│   ├── Board.py
-│   ├── Pawn.py
-│   └── Move.py
+│   └── Board.py
 ├── controler/
-│   ├── Markdown.py
+│   ├── Game.py
+│   ├── Menu.py
 │   ├── AutoPlayer.py
 │   ├── autoplayer/
 │   │   ├── RandomIA.py
-│   │   └── HeuristIA.py
-│   └── Game.py
-└── boundary/
-    └── View.py
+│   │   ├── HumanIA.py
+│   │   └── HeuristIA.py (not yet)
+│   └── Markdown.py
+├── boundary/
+│   ├── MenuView.py
+│   ├── View.py
+│   └── Keyboard.py
+├── utils/
+│   ├── terminal.py
+│   ├── Pawn.py
+│   └── Move.py
+└── sources/
+    └── rules.md
 ```
 
 **Entity (E) :** Définit les éléments du jeu (plateau, pions, déplacements).
@@ -30,15 +38,21 @@ Aruba/
 
 **Boundary (B) :** Gère l'affichage et l'interaction avec l'utilisateur.
 
+**Utils :** Contient des classes utilitaires, principalement des enums.
+
+**Sources :** Contient les fichiers non exécutables du projet.
+
 ## Fonctionnalités
 
 - Jeu au tour par tour entre deux joueurs.
-- Affichage du plateau en ASCII avec des bordures et des coordonnées.
+- Affichage d'un menu de jeu interactif.
+- Affichage du plateau avec des bordures et des coordonnées.
 - Déplacement des pions sur le plateau.
 - Prise de pions adverses.
-- Configuration standard du jeu
+- Configuration standard du jeu.
 - Affichage des règles du jeu en Markdown dans le terminal.
 - Possibilité de jouer contre différentes IA :
+  - **HumanIA**  : N'est pas une IA, mais une interface pour un joueur humain.
   - **RandomIA** : Joue un coup aléatoire.
   - **HeuristIA** : Joue un coup en fonction d'une heuristique.
 
@@ -54,7 +68,11 @@ Le plateau est une grille carrée de $n\times n$ remplie selon le schéma suivan
 
 ## Installation et exécution
 
-Assurez-vous d'avoir Python installé sur votre machine.
+Assurez-vous d'avoir Python `>3.9` installé sur votre machine.
+
+Seuls Linux et Microsoft Windows sont supportés. Possiblement MacOS mais non testé.
+
+un terminal compatible avec les séquences d'échappement ANSI est nécessaire pour un affichage correct (ex: Gnome Terminal, Konsole, Windows Terminal).
 
 Pour installer le projet, il suffit de cloner le dépôt git.
 
