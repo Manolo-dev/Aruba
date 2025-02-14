@@ -217,7 +217,7 @@ class MenuView :
               "\033[0m", # Normal
               end="")
         
-        print(f"\033[7;5H\033[1m{text}\033[0m") # Affiche le gagant au centre de l'écran de fin de partie
+        print(f"\033[7;5H\033[37;1m{text}\033[0m") # Affiche le gagant au centre de l'écran de fin de partie
 
 
         while True :
