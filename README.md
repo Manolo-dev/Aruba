@@ -146,7 +146,7 @@ python3 main.py
 ## Auteurs
 
 - [Manolo SARDÓ](https://github.com/Manolo-dev) : Chef de projet
-- [Manolo SARDÓ](https://github.com/Manolo-dev) : Dorection artistique
+- [Manolo SARDÓ](https://github.com/Manolo-dev) : Direction artistique
 - [Manolo SARDÓ](https://github.com/Manolo-dev) : Responsable documentation
 - [Manolo SARDÓ](https://github.com/Manolo-dev) : Responsable test
 - [Manolo SARDÓ](https://github.com/Manolo-dev) : Développeur
