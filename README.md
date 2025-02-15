@@ -12,6 +12,8 @@ Je trouve ça triste - voir assez lamentable - que des professeurs qui affirment
 
 Je tient d'ailleur à noter que certains de mes professeurs codent - pour leur cours du moins, j'espère qu'il n'en est pas de même pour leur recherches - souvent terriblement mal. Ça peut s'expliquer par plusieurs plus ou moins bonnes raisons, mais ça reste un fait. Je ne critique pas leur pédagogie ou leur compétences, mais je trouve que c'est un peu hypocrite de leur part de nous demander de faire des choses qu'ils ne font pas eux-même. Et surtout de nous demander de faire des choses (en l'occurrence, un code propre) tout en nous imposant des contraintes qui nous empêchent de le faire.
 
+Le sujet indique que nous n'avons pas le droit d'utiliser de classes ou de types _"avancés"_ (tel que les `set`, les `map`) car nos pairs (qui nous corrigent) peuvent ne pas les connaître. C'est une raison valable, MAIS, je considère qu'un code qui les utilise et qui est commenté et documenté permet - en plus de le comprendre - d'apprendre de nouvelles choses. C'est d'ailleurs pour ça que je fais ce projet, pour que ceux qui pourraient le voir puissent apprendre de nouvelles choses. Si le code est propre et commenté, les types _"avancés"_ ne sont pas un problème, bien au contraire.
+
 ## Structure du projet
 
 Le projet est organisé selon le modèle ECB (Entity-Control-Boundary). L'architecture du projet est la suivante :
