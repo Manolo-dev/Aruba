@@ -138,7 +138,6 @@ python3 main.py
   - [Documentation ANSI](https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797)
 - Utilisation des **caractères spéciaux Unicode** pour l'affichage :
   - [Liste des caractères du plateau](https://www.compart.com/fr/unicode/block/U+2500)
-  - [Liste des caractères d'indices](https://www.compart.com/fr/unicode/block/U+2070)
   - [Caractère de pion](https://www.compart.com/fr/unicode/U+25CF)
 - [Liste par compréhension](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)
 - [ternary operator](https://docs.python.org/3/reference/expressions.html#conditional-expressions)
