@@ -18,7 +18,7 @@ Aruba/
 │   ├── autoplayer/
 │   │   ├── RandomIA.py
 │   │   ├── HumanIA.py
-│   │   └── HeuristIA.py (not yet)
+│   │   └── HeuristIA.py
 │   └── Markdown.py
 ├── boundary/
 │   ├── MenuView.py
@@ -65,6 +65,45 @@ Le plateau est une grille carrée de $n\times n$ remplie selon le schéma suivan
     - Une partie avec des pions rouges.
     - Une autre partie avec des pions bleus.
     - Une ou deux cases peuvent rester vides, selon que $n$ est pair ou impair.
+
+## HeuristIA
+
+Basé sur un algorithme Minimax, et une heuristique simple. L'heuristique est basée sur les critères suivants :
+
+- Prioriser les captures
+- Maximiser les captures enchaînées
+- Minimiser les options adverses
+
+Pour évaluer un coup, on va le simuler et évaluer le plateau obtenu. On va alors attribuer un score au coup en fonction de l'heuristique.
+
+### Prioriser les captures
+
+Si après simulation d'une prise c'est toujours au tour de l'IA, on ajoute $10$ point au score.
+
+### Maximiser les captures enchaînées
+
+Si après simulation d'une prise c'est toujours au tour de l'IA, on ajouter au score le score de la capture enchaînée.
+
+Les scores ainsi obtenus sont conséquents, par effet cumulatif de la récursivité.
+
+### Minimiser les options adverses
+
+Après simulation d'un coup, on enlève $3$ points par prise possible par l'adversaire et $1$ point par déplacement possible.
+
+## Menu
+
+Le menu est interactif et permet de choisir entre les différentes options suivantes :
+
+- **Jouer** : Permet de jouer une partie contre une IA ou un autre joueur.
+- **Règles** : Affiche les règles du jeu.
+- **Quitter** : Permet de quitter le jeu.
+
+### Jouer
+
+Le sous-menu de jeu permet de choisir entre les différentes options suivantes :
+
+- **Jouer à deux** : Permet de jouer une partie contre un autre joueur.
+- **IA** : La liste des IA disponibles est affichée, et l'utilisateur peut en choisir une pour jouer contre.
 
 ## Installation et exécution
 
