@@ -2,6 +2,14 @@
 
 Ce projet est un jeu de plateau simple, inspiré du jeu de dames, développé en Python. Il a été réalisé *à tort* dans le cadre du cours de info1.projet à l'Université de Toulouse (anciennement Université Toulouse III - Paul Sabatier).
 
+## _À tort_
+
+J'ai commencé ce projet dans l'optique de prendre de l'avance sur le cours d'info1.projet de l'Université de Toulouse. J'ai décidé, sachant que l'évaluation se ferait par mes camarades et que le sujet insisterait sur la lisibilité du code, de faire un projet propre et bien documenté.
+
+Hélas, lors de mon premier cours, le professeur nous a annoncé que le projet devait être rendu dans un seul fichier python, sans classe, sans encapsulation, avec des test manuels et non protégés, et sans documentation (nous avons tout de même le droit à des docstrings  et des commentaires, mais pas de README ou de bibliographie).
+
+Je trouve ça triste - voir assez lamentable - que des professeurs qui affirment nous apprendre le clean code et les bonnes pratiques nous demandent de faire strictement l'inverse. C'est pourquoi je publie ce projet sur GitHub, pour montrer que même un étudiant est capable de faire un projet propre et documenté. Et qu'il est, de toute manière, bien plus logique de faire un code propre quand on est évalué par d'autres étudiants (pas seulement des étudiants en informatique, mais aussi des étudiants en biologie, en mathématiques, en physique, etc.), étudiants qui ne sont par ailleurs, pas formés à la programmation et l'analyse de code.
+
 ## Structure du projet
 
 Le projet est organisé selon le modèle ECB (Entity-Control-Boundary). L'architecture du projet est la suivante :
