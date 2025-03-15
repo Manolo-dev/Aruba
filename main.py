@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from controler.Game import Game
 from controler.autoplayer.RandomIA import RandomIA
 from controler.autoplayer.HeuristIA import HeuristIA

@@ -173,7 +173,8 @@ class Markdown:
         lines = md_text.split("\n")
         output = []
 
-        for line in lines:
+        while lines:
+            line = lines.pop(0)
             if match := re.match(r"^(#{1,6}) (.*)$", line):  # Vérifie si la ligne est un titre
                 level = len(match.group(1))  # Niveau du titre
                 title = match.group(2)  # Texte du titre
@@ -193,6 +194,9 @@ class Markdown:
                         formatted = " " + "\033[1;37m" + title + "\033[0m" + " \n" + "─" * (len(title) + 2)
                 
                 output.append(formatted)
+            elif match := re.match(r"^\`\`\`(.*?)$", line): # Vérifie si la ligne est un bloc de code
+                while (line := lines.pop(0)) != "```":
+                    output.append("\033[2m" + line + "\033[0m")
             else:  # Si la ligne n'est pas un titre
                 replacements = [
                     (r"\$(.*?)\$", Markdown.latex),                                        # LaTeX

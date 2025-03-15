@@ -68,16 +68,6 @@ Aruba/
   - **RandomIA** : Joue un coup aléatoire.
   - **HeuristIA** : Joue un coup en fonction d'une heuristique.
 
-## Configuration du jeu
-
-Le plateau est une grille carrée de $n\times n$ remplie selon le schéma suivant :
-- La moitié supérieure gauche (excluant la diagonale centrale) est remplie de pions bleus.
-- La moitié inférieure droite (excluant la diagonale centrale) est remplie de pions rouges.
-- La diagonale centrale est divisée en deux parties :
-    - Une partie avec des pions rouges.
-    - Une autre partie avec des pions bleus.
-    - Une ou deux cases peuvent rester vides, selon que $n$ est pair ou impair.
-
 ## HeuristIA
 
 Basé sur un algorithme Minimax, et une heuristique simple. L'heuristique est basée sur les critères suivants :

@@ -10,6 +10,39 @@ L'objectif du jeu est de capturer tous les pions adverses.
 - Deux ensembles de pions : bleus et rouges (Pour les distinguer facilement dans le terminal).
 - Un joueur automate ou un autre joueur.
 
+## Disposition des Pions
+
+Le plateau est une grille carrée de $n\cdot n$ remplie selon le schéma suivant :
+- La moitié supérieure gauche (excluant la diagonale centrale) est remplie de pions bleus.
+- La moitié inférieure droite (excluant la diagonale centrale) est remplie de pions rouges.
+- La diagonale centrale est divisée en deux parties :
+    - Une partie avec des pions rouges.
+    - Une autre partie avec des pions bleus.
+    - Une ou deux cases peuvent rester vides, selon que $n$ est pair ou impair.
+
+### Exemple de Disposition
+
+Dans un plateau $7\cdot 7$ (les pions bleus sont représentés par `●` et les pions rouges par `○`):
+
+```
+  ┌───┬───┬───┬───┬───┬───┬───┐
+1 │ ● │ ● │ ● │ ● │ ● │ ● │ ● │
+  ├───┼───┼───┼───┼───┼───┼───┤
+2 │ ● │ ● │ ● │ ● │ ● │ ● │ ○ │
+  ├───┼───┼───┼───┼───┼───┼───┤
+3 │ ● │ ● │ ● │ ● │ ● │ ○ │ ○ │
+  ├───┼───┼───┼───┼───┼───┼───┤
+4 │ ● │ ● │ ● │   │ ○ │ ○ │ ○ │
+  ├───┼───┼───┼───┼───┼───┼───┤
+5 │ ● │ ● │ ● │ ○ │ ○ │ ○ │ ○ │
+  ├───┼───┼───┼───┼───┼───┼───┤
+6 │ ● │ ● │ ○ │ ○ │ ○ │ ○ │ ○ │
+  ├───┼───┼───┼───┼───┼───┼───┤
+7 │ ● │ ○ │ ○ │ ○ │ ○ │ ○ │ ○ │
+  └───┴───┴───┴───┴───┴───┴───┘
+    A   B   C   D   E   F   G
+```
+
 ## Déroulement du Jeu
 
 1. Chaque joueur joue à tour de rôle.
